@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI_Validation", "WebAPI_Validation\WebAPI_Validation.csproj", "{EBB27C70-1279-40F6-9EDF-175E89DF8ACD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client_App", "Client_APp\Client_App.csproj", "{52B7C611-03D3-45F5-A4C9-098C5CB2E662}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBB27C70-1279-40F6-9EDF-175E89DF8ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB27C70-1279-40F6-9EDF-175E89DF8ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB27C70-1279-40F6-9EDF-175E89DF8ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB27C70-1279-40F6-9EDF-175E89DF8ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52B7C611-03D3-45F5-A4C9-098C5CB2E662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52B7C611-03D3-45F5-A4C9-098C5CB2E662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52B7C611-03D3-45F5-A4C9-098C5CB2E662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52B7C611-03D3-45F5-A4C9-098C5CB2E662}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-2.1.4.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/knockout-3.3.0.js"></script>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <table class="table table-bordered table-striped table-condensed">
+        <tr>
+            <td>EmpNo</td>
+            <td>
+                <input type="text" class="form-control" data-bind="value:EmpNo" />
+            </td>
+        </tr>
+        <tr>
+            <td>EmpName</td>
+            <td>
+                <input type="text" class="form-control" data-bind="value:EmpName" />
+            </td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td>
+                <input type="text" class="form-control" data-bind="value:Salary" />
+            </td>
+        </tr>
+        <tr>
+            <td>DeptName</td>
+            <td>
+                <input type="text" class="form-control" data-bind="value:DeptName" />
+            </td>
+        </tr>
+        <tr>
+            <td>Designation</td>
+            <td>
+                <input type="text" class="form-control" data-bind="value:Designation" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="New" class="btn btn-default" data-bind="click:clear"/>
+            </td>
+            <td>
+                <input type="button" value="Save" class="btn btn-success" data-bind="click:post" />
+            </td>
+        </tr>
+    </table>
+
+    <hr />
+    <div data-bind="text:Message"></div>
+    <hr />
+    <table class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>EmpNo</th>
+                <th>EmpName</th>
+                <th>Salary</th>
+                <th>DeptName</th>
+                <th>Designation</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:Employees">
+            <tr>
+                <td>
+                    <span data-bind="text:EmpNo"></span>
+                </td>
+                <td>
+                    <span data-bind="text:EmpName"></span>
+                </td>
+                <td>
+                    <span data-bind="text:Salary"></span>
+                </td>
+                <td>
+                    <span data-bind="text:DeptName"></span>
+                </td>
+                <td>
+                    <span data-bind="text:Designation"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+
+        //ViewModel
+        var viewModel = function () {
+            var self = this;
+
+            self.Employees = ko.observableArray([]);
+
+            self.EmpNo = ko.observable(0);
+            self.EmpName = ko.observable("");
+            self.Salary = ko.observable(0);
+            self.DeptName = ko.observable("");
+            self.Designation = ko.observable("");
+            self.Message = ko.observable();
+
+            var Emp = {
+                EmpNo: self.EmpNo,
+                EmpName: self.EmpName,
+                Salary:self.Salary,
+                DeptName: self.DeptName,
+                Designation:self.Designation
+            };
+
+
+            loadData();
+            //The Get call to Get all Employees
+            function loadData() {
+                var url = "http://localhost:65131/api/EmployeeInfoAPI";
+                $.ajax({
+                    url: url,
+                    type: "GET"
+                }).done(function (resp) {
+                    self.Employees(resp);
+                }).error(function (err) {
+                    self.Message("Error " + err.status);
+                });
+            };
+
+            self.clear = function () {
+                self.EmpNo = ko.observable(0);
+                self.EmpName = ko.observable("");
+                self.Salary = ko.observable(0);
+                self.DeptName = ko.observable("");
+                self.Designation = ko.observable("");
+                self.Message = ko.observable("");
+            };
+
+
+            //Function to Post the Employee Object
+
+            self.post = function () {
+                 
+                $.ajax({
+                    url: "http://localhost:65131/api/EmployeeInfoAPI",
+                    type:"POST",
+                    data:  Emp,
+                    contenttype: "application/json;utf-8",
+                    datatype:"json"
+                }).done(function (resp) {
+                    self.EmpNo(resp.EmpNo);
+                    loadData();
+                }).error(function (err) {
+                    self.Message("Error " + err.status + err.responseText);
+                });
+            };
+        };
+        ko.applyBindings(new viewModel());
+    </script>
+</body>
+</html>
